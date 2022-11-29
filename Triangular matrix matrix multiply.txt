@@ -1,0 +1,256 @@
+#include<stdio.h>
+/* Triangular matrix is a special type of square matrix .There are two types of triangular matrices upper and lower triangular */
+void uptri();
+void lowtri();
+void main()
+{
+int ch;
+printf("1.Proceed with upper triangular matrix\n2.Proceed with lower triangular matrix\n");
+printf("enter your choice: ");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+uptri();
+break;
+case 2:
+lowtri();
+break;
+
+}
+}
+void uptri()
+{
+int i, j, k, row, col, isUpper,MAX_COLS,MAX_ROWS;
+printf("Enter order of matrix:(row = col):"); // As it is special type of square matrix so order is
+n*n
+scanf("%d",&MAX_ROWS);
+MAX_COLS=MAX_ROWS;
+int array[MAX_ROWS][MAX_ROWS];
+printf("Enter elements in matrix of size %dx%d: \n", MAX_ROWS, MAX_COLS);
+
+for(row=0; row<MAX_ROWS; row++)
+{
+for(col=0; col<MAX_COLS; col++)
+{
+scanf("%d", &array[row][col]);
+}
+}
+// Checking for upper triangular matrix where the elements below diagonal are zero
+isUpper = 1;
+for(row=0; row<MAX_ROWS; row++)
+{
+for(col=0; col<MAX_COLS; col++)
+{
+if(col<row && array[row][col]!=0)
+{
+isUpper = 0;
+}
+}
+}
+//Displaying upper triangular matrix
+if(isUpper == 1)
+{
+printf("\nThe matrix is Upper triangular matrix.\n");
+
+for(row=0; row<MAX_ROWS; row++)
+{
+for(col=0; col<MAX_COLS; col++)
+{
+printf("%d ", array[row][col]);
+}
+
+printf("\n");
+}
+// entering elements of the second matrix which is to be multiplied
+int r1,r2,c1,c2;
+printf("Enter number of rows for Second Matrix to be multiplied:\n");
+scanf("%d",&r1);
+printf("Enter number of columns for Second Matrix:\n");
+scanf("%d",&c1);
+
+// Checking condition for multiplication if no of columns in 1st matrix = no of rows in the 2nd
+matrix
+
+if(MAX_COLS!=r1)
+{
+printf("Matrices Can't be multiplied together");
+}
+//Entering second matrix elements
+else
+{
+int m1[r1][c1];
+printf("Enter second matrix elements \n");
+for(i=0;i<r1;i++)
+{
+for(j=0;j<c1;j++)
+{
+scanf("%d",&m1[i][j]);
+}
+}
+// Displaying second matrix elements
+printf("\nThe second matrix.\n");
+
+for(row=0; row<r1; row++)
+{
+for(col=0; col<c1; col++)
+{
+printf("%d ", array[row][col]);
+}
+
+printf("\n");
+}
+// TRIANGULAR MATRIX-MATRIX MULTIPLICATION
+int mul[MAX_ROWS][c1];
+for(i=0;i<MAX_ROWS;i++)
+{
+for(j=0;j<c1;j++)
+{
+mul[i][j]=0;
+
+// Multiplying i’th row with j’th column
+for(k=0;k<MAX_ROWS;k++)
+{
+mul[i][j]+=array[i][k]*m1[k][j];
+}
+}
+}
+// Displaying multiplied matrix
+printf("\n");
+printf("Multiplied matrix\n");
+for(i=0;i<MAX_ROWS ;i++)
+{
+for(j=0;j<c1;j++)
+{
+
+printf("%d",mul[i][j]);
+}
+printf("\n");
+}
+}
+}
+
+else
+{
+printf("\nThe matrix is not Upper triangular matrix.");
+}
+
+}
+
+void lowtri()
+{
+int i, j, k, row, col, isLower,MAX_COLS,MAX_ROWS;
+printf("enter order of triangular matrix:(row = col):"); // As it is special type of square matrix so
+order is n*n
+scanf("%d",&MAX_ROWS);
+MAX_COLS=MAX_ROWS;
+int array[MAX_ROWS][MAX_ROWS];
+printf("Enter elements in matrix of size %dx%d: \n", MAX_ROWS, MAX_COLS);
+for(row=0; row<MAX_ROWS; row++)
+{
+for(col=0; col<MAX_COLS; col++)
+{
+scanf("%d", &array[row][col]);
+}
+}
+
+// Checking for lower triangular matrix where elements above diagonal are zero
+isLower = 1;
+for(row=0; row<MAX_ROWS; row++)
+{
+for(col=0; col<MAX_COLS; col++)
+{
+if(col>row && array[row][col]!=0)
+{
+isLower = 0;
+}
+}
+}
+// Displaying lower triangular matrix
+if(isLower == 1)
+{
+printf("\nMatrix is Lower triangular matrix: \n");
+for(row=0; row<MAX_ROWS; row++)
+{
+for(col=0; col<MAX_COLS; col++)
+{
+printf("%d ", array[row][col]);
+}
+
+printf("\n");
+}
+int r1,r2,c1,c2;
+printf("Enter number of rows for Second Matrix:\n");
+scanf("%d",&r1);
+printf("Enter number of columns for Second Matrix:\n");
+scanf("%d",&c1);
+
+// Checking condition for multiplication if no of columns in 1st matrix = no of rows in the 2nd
+matrix
+
+if(MAX_COLS!=r1)
+{
+printf("Matrices Can't be multiplied together");
+}
+// Entering second matrix elements
+else
+{
+int m1[r1][c1];
+printf("Enter second matrix elements \n");
+for(i=0;i<r1;i++)
+{
+for(j=0;j<c1;j++)
+{
+scanf("%d",&m1[i][j]);
+}
+}
+
+//Displaying second matrix
+printf("\nThe second matrix.\n");
+
+for(row=0; row<r1; row++)
+{
+for(col=0; col<c1; col++)
+{
+printf("%d ", array[row][col]);
+}
+
+printf("\n");
+
+}
+// TRIANGULAR MATRIX-MATRIX MULTIPLICATION
+int mul[MAX_ROWS][c1];
+for(i=0;i<MAX_ROWS;i++)
+{
+for(j=0;j<c1;j++)
+{
+mul[i][j]=0;
+
+// Multiplying i’th row with j’th column
+for(k=0;k<MAX_ROWS;k++)
+{
+mul[i][j]+=array[i][k]*m1[k][j];
+}
+}
+}
+//Displaying multiplied matrix
+printf("\n");
+printf("Multiplied matrix\n");
+for(i=0;i<MAX_ROWS ;i++)
+{
+for(j=0;j<c1;j++)
+{
+printf("%d ",mul[i][j]);
+}
+printf("\n");
+}
+}
+}
+else
+{
+
+printf("\nMatrix is not a Lower triangular matrix");
+}
+}
+
+

@@ -1,0 +1,125 @@
+//DSYMM
+#include<stdio.h>
+#include<math.h>
+
+void main(){
+    int r1,c1,c2,r2,a,b,e,f,alpha,beta;
+    
+    //matrix 1 rows and column
+    printf("first matrix\n");
+    printf("enter number of rows: ");
+    scanf("%d", &r1);
+    printf("enter number of cols: ");
+    scanf("%d", &c1);
+    
+    
+    
+
+    int matrix1[r1][c1];
+    //matrix 1 
+    for (a=0;a<r1;a++)
+    {
+        for (b=0;b<c1;b++)
+        {
+            printf("Enter data in [%d][%d]: ", a, b);
+            scanf("%d", &matrix1[a][b]);
+        }
+    }
+    
+    
+    //display matrix 1 
+    for (int a=0;a<r1;a++)
+    {
+        for (int b=0;b<c1;b++)
+        {   
+            printf("%d\t", matrix1[a][b]);
+        }
+        printf("\n");
+    }
+
+    
+    //matrix 2 rows and column
+    printf("second matrix\n");
+    printf("enter number of rows: ");
+    scanf("%d", &r2);
+    printf("enter number of cols: ");
+    scanf("%d", &c2);
+    int matrix2[r2][c2];
+    
+    
+    //matrix 2
+    for (e=0;e<r2;e++)
+    {
+        for (f=0;f<c2;f++)
+        {
+            printf("Enter data in [%d][%d]: ", e, f);
+            scanf("%d", &matrix2[e][f]);
+        }
+    }
+    
+    //display matrix 2
+    for (int e=0;e<r2;e++)
+    {
+        for (int f=0;f<c2;f++)
+        {   
+            printf("%d\t", matrix2[e][f]);
+        }
+        printf("\n");
+    }
+int trans[r1][c1],Count=1;
+   	//Transpose of matrix 
+ 	for(int a = 0; a < r1; a++)
+  	{
+   		for(int b = 0;b < c1; b++)
+    	{
+      		trans[b][a] = matrix1[a][b];
+    	}
+  	}    
+ 	for(int a = 0; a < r1; a++)
+  	{
+   		for(int b = 0; b < r2; b++)
+    	{
+    		if(matrix1[a][b] != trans[a][b])
+    		{   		    
+    			Count++;  
+				break;  		
+			}
+   	 	}
+  	}
+  	if(Count == 1)
+  	{
+        if(c1!=r2)
+      {
+          printf("Matrices Can't be multiplied together");
+      }
+      else
+      {
+          int mul[r1][c2];
+          for(int i=0;i<r1;i++)    
+          {    
+              for(int j=0;j<c2;j++)    
+              {
+                    mul[i][j]=0;
+                    // Multiplying i’th i with j’th column
+                    for(int k=0;k<c1;k++)    
+                    {    
+                      mul[i][j]+=matrix1[i][k]*matrix2[k][j];    
+                    } 
+              }    
+          }    
+          printf("Multiplied matrix\n");     
+          for(int i=0;i<r1;i++)    
+          {    
+              for(int j=0;j<c2;j++)    
+              {    
+                  printf("%d\t",mul[i][j]);    
+              }    
+              printf("\n");    
+          } 
+      }
+
+    }
+	else
+	{
+		printf("\n error");
+	}
